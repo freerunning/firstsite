@@ -1,0 +1,14 @@
+<h1>{{ poll.question }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if already_vote %}<p style="color:red"><strong>{{ already_vote }}, 已经投过票了，韩亮你这个逗比.</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' poll.id %}" method="post">
+    {% for choice in poll.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value = "{{ choice.id }}"/>
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+    <input type="submit" value="OK" />
+</form>
+
+<a href="{% url 'polls:index' %}">回到首页</a>

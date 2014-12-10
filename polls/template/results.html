@@ -1,0 +1,13 @@
+<h1>{{ poll.question }}</h1>
+<h2 style="color:red">已经投过票了，韩亮是个大逗比.</h2>
+<ul>
+    {% for choice in poll.choice_set.all %}
+    <li>{{ choice.choice_text }} --- {{ choice.votes }}票
+        {% for ip in choice.ip.all %}
+        > {{ ip.name }} {{ ip.ip }}
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'polls:index' %}">回到首页</a>
